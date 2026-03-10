@@ -1,0 +1,22 @@
+<dashboard>
+  <label>SOC Overview</label>
+  <row>
+    <panel>
+      <title>Failed Logins by IP</title>
+      <chart>
+        <search>
+          <query>index=security EventCode=4625 | stats count by src_ip | sort -count | head 10</query>
+          <earliest>-24h</earliest>
+        </search>
+      </chart>
+    </panel>
+    <panel>
+      <title>Blocked Malware</title>
+      <table>
+        <search>
+          <query>index=endpoint action=blocked | table _time, host, threat_name | sort -_time</query>
+        </search>
+      </table>
+    </panel>
+  </row>
+</dashboard>
